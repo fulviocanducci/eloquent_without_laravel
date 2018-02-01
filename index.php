@@ -5,5 +5,9 @@ require "bootstrap.php";
 use Models\People;
 
 
-var_dump(People::whereId(1)->get());
+$p = People::whereId(1)
+           ->first();
+
+
+print_r($p->created_at);
 

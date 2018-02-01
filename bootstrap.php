@@ -1,18 +1,18 @@
-<?php
-
-require "vendor/autoload.php";
+<?php require "vendor/autoload.php";
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
 
 $capsule = new Capsule();
 
-$capsule->addConnection([
-    "driver" => "mysql",
-    "host" => "127.0.0.1",
-    "database" => "homestead",
-    "username" => "root",
-    "password" => "senha"
-]);
+$capsuleConfig["driver"] = "mysql";
+$capsuleConfig["host"] = "127.0.0.1"; //localhost or ip
+$capsuleConfig["database"] = "homestead";
+$capsuleConfig["username"] = "root";
+$capsuleConfig["password"] = "senha";
 
+$capsule->addConnection($capsuleConfig);
+$capsule->setEventDispatcher(new Dispatcher(new Container));
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
